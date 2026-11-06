@@ -26,7 +26,14 @@ function parseStoredCategories(raw: string): Category[] {
       return []
     }
 
-    return parsed.filter(isCategory)
+    if (!parsed.every(isCategory)) {
+      console.warn(
+        '[categoryStorage] Categorías inválidas; se usa lista vacía.',
+      )
+      return []
+    }
+
+    return parsed
   } catch {
     console.warn('[categoryStorage] Datos corruptos; se usa lista vacía.')
     return []
